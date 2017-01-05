@@ -12,10 +12,7 @@
 #include <openssl/ecdsa.h>
 #include <openssl/obj_mac.h>
 
-//const uint8_t stealth_version_byte = 0x2a;
-//const uint8_t stealth_version_byte = 0x28;
-const uint8_t stealth_version_byte = 0x24;
-
+const uint8_t stealth_version_byte = 0x2b;
 
 bool CStealthAddress::SetEncoded(const std::string& encodedAddress)
 {

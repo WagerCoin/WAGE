@@ -963,41 +963,18 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan)
 // miner's coin base reward
 int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 {
-    int64_t nSubsidy = 0;
-		
-	if(pindexBest->nHeight < 1)
-    {
-        nSubsidy = 140000 * COIN; // 2% premine (1% for developer - 1% for bounties)
-    }
-		else if(pindexBest->nHeight < LAST_FAIR_LAUNCH_BLOCK)
-    {
-		nSubsidy = 0 * COIN; // No reward block to prevent an instamine
-    }
-		else if(pindexBest->nHeight < LAST_POW_BLOCK)
-    {
-		nSubsidy = 500 * COIN; 
-    }
+    int64_t nSubsidy = 25 * COIN;
 
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
 
     return nSubsidy + nFees;
 }
-const int YEARLY_BLOCKCOUNT = 525948;
+
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 {
-	if (pindexBest->nHeight > (YEARLY_BLOCKCOUNT*37)) // 37 years.
-        return nFees; // We need a better way of doing this instead of blockcount.
-
-    int64_t nRewardCoinYear;
-
-    nRewardCoinYear = COIN_YEAR_REWARD;
-    if (pindexBest->nHeight > (1*YEARLY_BLOCKCOUNT)) // After 1 year, 5.5% PoS
-        nRewardCoinYear = COIN_YEAR_REWARD/2;
-
-    int64_t nSubsidy = nCoinAge * nRewardCoinYear / 365 / COIN;
-    //int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+    int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
 
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
@@ -2066,9 +2043,6 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK)
-        return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
-
     // Check proof-of-work or proof-of-stake
     if (nBits != GetNextTargetRequired(pindexPrev, IsProofOfStake()))
         return DoS(100, error("AcceptBlock() : incorrect %s", IsProofOfWork() ? "proof-of-work" : "proof-of-stake"));
@@ -2450,9 +2424,9 @@ bool LoadBlockIndex(bool fAllowNew)
         if (!fAllowNew)
             return false;
 
-        const char* pszTimestamp = "Wager FRESH POW - VARIABLE POS INTEREST - STEALTH ADDRESSES - WAGE 20141508";
+        const char* pszTimestamp = "98asd7f9a8sd7fa9d8s7";
         CTransaction txNew;
-        txNew.nTime = 1408137516;
+        txNew.nTime = 1483600507;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2463,10 +2437,10 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1408137516;
+        block.nTime    = 1483600507;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-		block.nNonce   = 1029576;
-		if(fTestNet)
+        block.nNonce   = 1159792;
+        if(fTestNet)
         {
             block.nNonce   = 0;
         }
@@ -2493,7 +2467,7 @@ bool LoadBlockIndex(bool fAllowNew)
         
         
         //// debug print
-        assert(block.hashMerkleRoot == uint256("0xe67bd0b2c8a4b61af92a0d2b2af9969c51745de7faa98a9b92d0e83969e5d0d5"));
+        assert(block.hashMerkleRoot == uint256("0xbb07fc6486b41a82818ced6f978761a540e0155d74c039d1ede6335033c24aca"));
         block.print();
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());

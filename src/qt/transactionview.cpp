@@ -52,8 +52,8 @@ TransactionView::TransactionView(QWidget *parent) :
 #else
     dateWidget->setFixedWidth(120);
 #endif
-    dateWidget->addItem(tr("All"), All);
     dateWidget->addItem(tr("Today"), Today);
+    dateWidget->addItem(tr("All"), All);
     dateWidget->addItem(tr("This week"), ThisWeek);
     dateWidget->addItem(tr("This month"), ThisMonth);
     dateWidget->addItem(tr("Last month"), LastMonth);

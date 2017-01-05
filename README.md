@@ -5,7 +5,7 @@ Wager is a POW-based/POS based FRESH cryptocurrency.
 
 FRESH consists of three hashing algorithms (Shavite, Simd, and Echo) all of which are pushed through 5 rounds of hashing to create the "FRESH" algo. FRESH saves you over 20% on heat consumption and energy consumption on your mining hardware compared to other leading algos such as SHA256, Scrypt, X11, X13, and X15.
 
-Wager features a completely custom QT wallet with NightSend Stealth Addresses, Encrypted P2P Messaging, Block Explorer, and Statistics.
+Wager features a completely custom QT wallet with Stealth Addresses, Encrypted P2P Messaging, Block Explorer, and Statistics.
 
 Wager's market ticker is WAGE
 Total Max POW Coins: Approx. 7.14 Million WAGE
