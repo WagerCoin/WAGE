@@ -1,0 +1,9 @@
+Building Wager
+
+See doc/readme-qt.rst for instructions on building Wager QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Wager.
+
+See doc/build-*.txt for instructions on building Wagerd,
+the intended-for-services, no-graphical-interface, reference
+implementation of Wager.
