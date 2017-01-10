@@ -55,7 +55,7 @@ QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
 # This can be enabled for Windows, when we switch to MinGW >= 4.4.x.
 }
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
-win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat -Wl,--large-address-aware -static
+win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
 win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 lessThan(QT_MAJOR_VERSION, 5): win32: QMAKE_LFLAGS *= -static
 
@@ -247,8 +247,6 @@ HEADERS += src/qt/bitcoingui.h \
     src/ui_interface.h \
     src/qt/rpcconsole.h \
     src/qt/trafficgraphwidget.h \
-	src/qt/blockbrowser.h \
-	src/qt/statisticspage.h \
     src/version.h \
 	src/bloom.h \
     src/netbase.h \
@@ -279,8 +277,6 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/aboutdialog.cpp \
     src/qt/editaddressdialog.cpp \
     src/qt/bitcoinaddressvalidator.cpp \
-	src/qt/statisticspage.cpp \
-	src/qt/blockbrowser.cpp \
     src/alert.cpp \
     src/version.cpp \
     src/sync.cpp \
@@ -366,8 +362,6 @@ FORMS += \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/optionsdialog.ui \
     src/qt/forms/messagepage.ui \
-	src/qt/forms/statisticspage.ui \
-	src/qt/forms/blockbrowser.ui \
     src/qt/forms/sendmessagesentry.ui \
     src/qt/forms/sendmessagesdialog.ui \
     src/qt/plugins/mrichtexteditor/mrichtextedit.ui
@@ -414,7 +408,7 @@ isEmpty(BOOST_THREAD_LIB_SUFFIX) {
 }
 
 isEmpty(BDB_LIB_PATH) {
-    macx:BDB_LIB_PATH =
+    macx:BDB_LIB_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/lib
     windows:BDB_LIB_PATH=D:/deps/db-4.8.30.NC/build_unix
 }
 
@@ -423,27 +417,27 @@ isEmpty(BDB_LIB_SUFFIX) {
 }
 
 isEmpty(BDB_INCLUDE_PATH) {
-    macx:BDB_INCLUDE_PATH =
+    macx:BDB_INCLUDE_PATH = /usr/local/Cellar/berkeley-db4/4.8.30/include
     windows:BDB_INCLUDE_PATH=D:/deps/db-4.8.30.NC/build_unix
 }
 
 isEmpty(BOOST_LIB_PATH) {
-    macx:BOOST_LIB_PATH =
+    macx:BOOST_LIB_PATH = /usr/local/Cellar/boost/1.59.0/lib
     windows:BOOST_LIB_PATH=D:/deps/boost_1_57_0/stage/lib
 }
 
 isEmpty(BOOST_INCLUDE_PATH) {
-    macx:BOOST_INCLUDE_PATH =
+    macx:BOOST_INCLUDE_PATH = /usr/local/Cellar/boost/1.59.0/include
     windows:BOOST_INCLUDE_PATH=D:/deps/boost_1_57_0
 }
 
 isEmpty(QRENCODE_LIB_PATH) {
-    macx:QRENCODE_LIB_PATH =
+    macx:QRENCODE_LIB_PATH = /usr/local/lib
 	windows:QRENCODE_LIB_PATH=D:/deps/qrencode-3.4.4/.libs
 }
 
 isEmpty(QRENCODE_INCLUDE_PATH) {
-    macx:QRENCODE_INCLUDE_PATH =
+    macx:QRENCODE_INCLUDE_PATH = /usr/local/include
 	windows:QRENCODE_INCLUDE_PATH=D:/deps/qrencode-3.4.4
 }
 
@@ -452,22 +446,22 @@ isEmpty(MINIUPNPC_LIB_SUFFIX) {
 }
 
 isEmpty(MINIUPNPC_INCLUDE_PATH) {
-    macx:MINIUPNPC_INCLUDE_PATH=
+    macx:MINIUPNPC_INCLUDE_PATH=/usr/local/Cellar/miniupnpc/1.9.20151008/include
     windows:MINIUPNPC_INCLUDE_PATH=D:/deps/
 }
 
 isEmpty(MINIUPNPC_LIB_PATH) {
-    macx:MINIUPNPC_LIB_PATH=
+    macx:MINIUPNPC_LIB_PATH=/usr/local/Cellar/miniupnpc/1.9.20151008/lib
     windows:MINIUPNPC_LIB_PATH=D:/deps/miniupnpc
 }
 
 isEmpty(OPENSSL_INCLUDE_PATH) {
-    macx:OPENSSL_INCLUDE_PATH =
+    macx:OPENSSL_INCLUDE_PATH = /usr/local/openssl-1.0.1p/include
     windows:OPENSSL_INCLUDE_PATH=D:/deps/openssl-1.0.1p/include
 }
 
 isEmpty(OPENSSL_LIB_PATH) {
-    macx:OPENSSL_LIB_PATH =
+    macx:OPENSSL_LIB_PATH = /usr/local/openssl-1.0.1p/lib
     windows:OPENSSL_LIB_PATH=D:/deps/openssl-1.0.1p/lib
 }
 
