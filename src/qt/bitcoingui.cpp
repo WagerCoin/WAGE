@@ -410,10 +410,12 @@ void BitcoinGUI::createToolBars()
 {
     mainIcon = new QLabel (this);
     mainIcon->setPixmap(QPixmap(":images/vertical"));
-    mainIcon->show();
+    mainIcon->hide();
 
     mainToolbar = addToolBar(tr("Tabs toolbar"));
     mainToolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    mainToolbar->setOrientation(Qt::Vertical);
+    mainToolbar->setMovable(false);
     mainToolbar->addWidget(mainIcon);
     mainToolbar->addAction(overviewAction);
     mainToolbar->addAction(sendCoinsAction);
@@ -422,14 +424,15 @@ void BitcoinGUI::createToolBars()
     mainToolbar->addAction(addressBookAction);
     mainToolbar->addAction(messageAction);
 
+    addToolBar(Qt::LeftToolBarArea, mainToolbar);
+
     secondaryToolbar = addToolBar(tr("Actions toolbar"));
     secondaryToolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    secondaryToolbar->setOrientation(Qt::Vertical);
+    secondaryToolbar->setMovable(false);
     secondaryToolbar->addAction(exportAction);
 
-    connect(mainToolbar,      SIGNAL(orientationChanged(Qt::Orientation)), this, SLOT(mainToolbarOrientation(Qt::Orientation)));
-    connect(secondaryToolbar, SIGNAL(orientationChanged(Qt::Orientation)), this, SLOT(secondaryToolbarOrientation(Qt::Orientation)));
-    mainToolbarOrientation(mainToolbar->orientation());
-    secondaryToolbarOrientation(secondaryToolbar->orientation());
+    addToolBar(Qt::LeftToolBarArea, secondaryToolbar);
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
